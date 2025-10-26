@@ -25,11 +25,21 @@ import {
   setLogLevel
 } from "firebase/firestore";
 
-// --- Firebase Конфигурация (MANDATORY) ---
-// Эти переменные будут предоставлены средой Canvas
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-zinka-app';
-const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+// --- Firebase Конфигурация (ОТКРЫТЫЕ КЛЮЧИ ДЛЯ ДЕПЛОЯ) ---
+// Важно: Эти ключи БЕЗОПАСНЫ, т.к. они только для КЛИЕНТА (frontend)
+const appId = 'ВАШ_ID_ПРИЛОЖЕНИЯ'; // Сюда вставь значение __app_id
+const firebaseConfig = { // Сюда вставь содержимое __firebase_config как объект
+  apiKey: "AIzaSy...",
+  authDomain: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "...",
+  measurementId: "..."
+};
+// Мы убираем initialAuthToken, потому что он нужен только для этой среды.
+const initialAuthToken = null; 
+// Пользователь будет входить анонимно или создаст новый профиль
 
 // --- Инициализация Firebase ---
 let app;
@@ -773,5 +783,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;
